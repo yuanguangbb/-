@@ -7,6 +7,7 @@ let projCounter = 3;
 let skillCounter = 10;
 let journeyCounter = 4;
 let editModeEnabled = false;
+let ownerModeEnabled = false;
 let contentSaveTimer = null;
 
 const STORAGE_KEYS = {
@@ -20,11 +21,15 @@ const STORAGE_KEYS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 从 localStorage 加载已保存的数据
-  loadData();
+  initOwnerMode();
+
+  // 个人资料只在本机管理模式读取，公开网站始终展示已发布版本。
+  if (ownerModeEnabled) loadData();
   prepareSkillEditors();
-  initEditableContent();
-  initPortraitCropper();
+  if (ownerModeEnabled) {
+    initEditableContent();
+    initPortraitCropper();
+  }
   refreshDerivedLinks();
 
   // 导航栏滚动效果
@@ -107,7 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ==================== 数据持久化 ====================
 
+function initOwnerMode() {
+  const localHosts = new Set(['localhost', '127.0.0.1', '::1']);
+  ownerModeEnabled = window.location.protocol === 'file:' || localHosts.has(window.location.hostname);
+  document.documentElement.classList.toggle('owner-mode', ownerModeEnabled);
+
+  const editorDock = document.getElementById('editorDock');
+  if (editorDock) editorDock.hidden = !ownerModeEnabled;
+}
+
 function loadData() {
+  if (!ownerModeEnabled) return;
+
   // 加载头像
   const savedPortrait = localStorage.getItem('site_portrait');
   if (savedPortrait) {
@@ -594,6 +610,8 @@ function initEditableContent() {
 }
 
 function loadEditableContent() {
+  if (!ownerModeEnabled) return;
+
   const content = readStoredJSON(STORAGE_KEYS.content, {});
   document.querySelectorAll('[data-edit-key]').forEach(element => {
     const value = content[element.dataset.editKey];
@@ -629,11 +647,14 @@ function handleEditableInput(event) {
 }
 
 function saveEditableContent() {
+  if (!ownerModeEnabled) return;
   localStorage.setItem(STORAGE_KEYS.content, JSON.stringify(collectEditableContent()));
   setEditorStatus('已保存到当前浏览器');
 }
 
 function toggleEditMode(forceState) {
+  if (!ownerModeEnabled) return;
+
   editModeEnabled = typeof forceState === 'boolean' ? forceState : !editModeEnabled;
   document.body.classList.toggle('edit-mode', editModeEnabled);
   document.getElementById('editorPanel').hidden = !editModeEnabled;
@@ -652,6 +673,8 @@ function toggleEditMode(forceState) {
 }
 
 function saveAllSiteData(showMessage = true) {
+  if (!ownerModeEnabled) return;
+
   saveEditableContent();
   saveProjects();
   saveSkills();
@@ -660,6 +683,8 @@ function saveAllSiteData(showMessage = true) {
 }
 
 function exportSiteData() {
+  if (!ownerModeEnabled) return;
+
   const backup = buildSiteBackup();
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -690,6 +715,8 @@ function buildSiteBackup() {
 }
 
 async function importSiteData(event) {
+  if (!ownerModeEnabled) return;
+
   const file = event.target.files?.[0];
   event.target.value = '';
   if (!file) return;
@@ -712,6 +739,8 @@ async function importSiteData(event) {
 }
 
 function resetSiteData() {
+  if (!ownerModeEnabled) return;
+
   if (!confirm('确定恢复默认内容？当前浏览器中的自定义文字、项目、技能、履历和照片都会清除。建议先导出备份。')) return;
   Object.values(STORAGE_KEYS).forEach(key => localStorage.removeItem(key));
   window.location.reload();

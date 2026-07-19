@@ -2087,6 +2087,11 @@ body.edit-mode .site-editable:hover {
   gap: 10px;
 }
 
+/* 默认隐藏管理入口，避免脚本加载前在公开页面短暂闪现。 */
+.editor-dock[hidden] {
+  display: none;
+}
+
 .editor-toggle {
   min-height: 48px;
   display: inline-flex;

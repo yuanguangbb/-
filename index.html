@@ -568,15 +568,15 @@
         </footer>
     </main>
 
-    <!-- 长期维护工具：默认只显示一个低干扰入口 -->
-    <aside class="editor-dock" id="editorDock" aria-label="网站编辑工具">
+    <!-- 本机维护工具：线上访客不可见，仅在 file://、localhost 或 127.0.0.1 下启用 -->
+    <aside class="editor-dock" id="editorDock" aria-label="网站编辑工具" hidden>
         <button type="button" class="editor-toggle" id="editModeToggle" onclick="toggleEditMode()">
             <span class="editor-seal" aria-hidden="true">简</span>
             <span id="editModeLabel">玉简编辑</span>
         </button>
         <div class="editor-panel" id="editorPanel" hidden>
             <p class="editor-panel-title">身份玉简管理</p>
-            <p class="editor-panel-help">点击带虚线的文字即可修改；项目、技能与履历使用各板块按钮管理。</p>
+            <p class="editor-panel-help">仅限本机管理。点击带虚线的文字即可修改；项目、技能与履历使用各板块按钮管理。</p>
             <div class="editor-panel-actions">
                 <button type="button" onclick="saveAllSiteData()">保存全部</button>
                 <button type="button" onclick="exportSiteData()">导出备份</button>
@@ -586,7 +586,7 @@
                 <button type="button" class="editor-danger" onclick="resetSiteData()">恢复默认</button>
                 <button type="button" class="editor-done" onclick="toggleEditMode(false)">完成编辑</button>
             </div>
-            <p class="editor-save-status" id="editorSaveStatus" aria-live="polite">所有修改仅保存在当前浏览器，请定期导出备份。</p>
+            <p class="editor-save-status" id="editorSaveStatus" aria-live="polite">修改仅保存在你的本机浏览器；发布时请同步到 GitHub。</p>
         </div>
     </aside>
 
