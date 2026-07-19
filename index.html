@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青竹小轩 | CAE仿真 · 汽车测试 · 机械设计</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入中文字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 背景装饰：竹林剪影 -->
+    <div class="bg-decoration">
+        <svg class="bamboo-left" viewBox="0 0 200 900" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="bambooGradL" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#2D5A3D;stop-opacity:0.18" />
+                    <stop offset="100%" style="stop-color:#2D5A3D;stop-opacity:0.08" />
+                </linearGradient>
+                <linearGradient id="leafGradL" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#2D5A3D;stop-opacity:0.12" />
+                    <stop offset="100%" style="stop-color:#3A734E;stop-opacity:0.05" />
+                </linearGradient>
+            </defs>
+            <!-- 主干 -->
+            <path d="M30,900 Q25,700 35,500 Q40,380 30,250 Q25,180 35,100" stroke="url(#bambooGradL)" stroke-width="6" fill="none"/>
+            <!-- 竹节 -->
+            <ellipse cx="30" cy="700" rx="5" ry="1.5" fill="#2D5A3D" opacity="0.08"/>
+            <ellipse cx="35" cy="500" rx="5" ry="1.5" fill="#2D5A3D" opacity="0.08"/>
+            <ellipse cx="30" cy="250" rx="4" ry="1.5" fill="#2D5A3D" opacity="0.07"/>
+            <!-- 叶片 -->
+            <path d="M35,500 Q65,485 90,495 Q68,505 35,505" fill="url(#leafGradL)"/>
+            <path d="M30,700 Q55,688 78,696 Q55,706 30,704" fill="url(#leafGradL)"/>
+            <path d="M30,250 Q55,238 75,248 Q55,258 30,254" fill="url(#leafGradL)"/>
+            <path d="M33,350 Q10,340 -5,348 Q12,356 33,353" fill="url(#leafGradL)"/>
+            <!-- 远处淡竹 -->
+            <path d="M70,900 Q68,750 75,600 Q80,500 72,400 Q68,330 75,250" stroke="#2D5A3D" stroke-width="2.5" fill="none" opacity="0.4"/>
+            <path d="M75,600 Q98,590 118,598 Q98,608 75,605" fill="#2D5A3D" opacity="0.05"/>
+            <path d="M72,400 Q55,392 40,400 Q55,408 72,404" fill="#2D5A3D" opacity="0.04"/>
+        </svg>
+        <svg class="bamboo-right" viewBox="0 0 180 700" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="bambooGradR" x1="0%" y1="0%" x2="-100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#2D5A3D;stop-opacity:0.15" />
+                    <stop offset="100%" style="stop-color:#2D5A3D;stop-opacity:0.06" />
+                </linearGradient>
+                <linearGradient id="leafGradR" x1="100%" y1="0%" x2="0%" y2="0%">
+                    <stop offset="0%" style="stop-color:#2D5A3D;stop-opacity:0.10" />
+                    <stop offset="100%" style="stop-color:#3A734E;stop-opacity:0.04" />
+                </linearGradient>
+            </defs>
+            <!-- 主干 -->
+            <path d="M150,700 Q145,550 155,400 Q160,310 150,220 Q145,160 155,80" stroke="url(#bambooGradR)" stroke-width="5" fill="none"/>
+            <!-- 竹节 -->
+            <ellipse cx="150" cy="550" rx="4.5" ry="1.5" fill="#2D5A3D" opacity="0.07"/>
+            <ellipse cx="155" cy="400" rx="4.5" ry="1.5" fill="#2D5A3D" opacity="0.07"/>
+            <ellipse cx="150" cy="220" rx="4" ry="1.5" fill="#2D5A3D" opacity="0.07"/>
+            <!-- 叶片 -->
+            <path d="M155,400 Q130,388 108,398 Q130,408 155,404" fill="url(#leafGradR)"/>
+            <path d="M150,550 Q172,540 192,548 Q172,558 150,554" fill="url(#leafGradR)"/>
+            <path d="M150,220 Q128,210 110,220 Q128,230 150,224" fill="url(#leafGradR)"/>
+        </svg>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-symbol brand-symbol-full site-editable" data-edit-key="siteName">青竹小轩</span>
+            <span class="brand-text site-editable" data-edit-key="siteLabel">身份玉简</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">修行起始</a></li>
+            <li><a href="#about">自我简介</a></li>
+            <li><a href="#projects">项目实战</a></li>
+            <li><a href="#skills">专业技能</a></li>
+            <li><a href="#journey">修行履历</a></li>
+            <li><a href="#contact">联系方式</a></li>
+        </ul>
+        <button class="mobile-menu-btn" aria-label="菜单">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#home">修行起始</a></li>
+            <li><a href="#about">自我简介</a></li>
+            <li><a href="#projects">项目实战</a></li>
+            <li><a href="#skills">专业技能</a></li>
+            <li><a href="#journey">修行履历</a></li>
+            <li><a href="#contact">联系方式</a></li>
+        </ul>
+    </div>
+
+    <!-- 主内容区 -->
+    <main>
+        <!-- 页面底层壁纸：鼠标经过时以柔边窗口揭示 -->
+        <div class="wallpaper-reveal-layer" id="wallpaperReveal" aria-hidden="true">
+            <figure class="wallpaper-panel wallpaper-top">
+                <img src="wallpaper-1.jpg" alt="" class="wallpaper-img" decoding="async">
+            </figure>
+            <figure class="wallpaper-panel wallpaper-bottom">
+                <img src="wallpaper-2.jpg" alt="" class="wallpaper-img" decoding="async">
+            </figure>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-alchemy-circle">
+                    <div class="alchemy-ring outer"></div>
+                    <div class="alchemy-ring inner"></div>
+                    <div class="alchemy-core"></div>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-main site-editable" data-edit-key="heroName">袁广</span>
+                    <span class="title-sub site-editable" data-edit-key="heroRole">CAE仿真 · 汽车测试 · 机械设计</span>
+                </h1>
+                <p class="hero-description site-editable" data-edit-key="heroDescription" data-edit-format="html">
+                    2027届汽车服务工程专业毕业生<br>
+                    以凡人之躯，逐技术之境。<br>
+                    专注CAE仿真与汽车零部件结构设计。
+                </p>
+                <div class="cultivation-status" aria-label="当前修行状态">
+                    <div class="status-item">
+                        <span class="status-label">当前修为</span>
+                        <strong class="site-editable" data-edit-key="currentRealm">汽车服务工程本科在读</strong>
+                    </div>
+                    <span class="status-seal" aria-hidden="true">凡</span>
+                    <div class="status-item">
+                        <span class="status-label">主修功法</span>
+                        <strong class="site-editable" data-edit-key="currentFocus">CAE仿真 · 结构设计</strong>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#projects" class="cta-primary">查看项目</a>
+                    <a href="#contact" class="cta-secondary">联系我</a>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <span>向下探索</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-icon">道</span>
+                    <span class="section-title-main site-editable" data-edit-key="aboutTitle">道心自述</span>
+                    <span class="title-icon">心</span>
+                </h2>
+                <div class="about-content">
+                    <div class="about-portrait">
+                        <div class="portrait-frame">
+                            <img id="portraitImg" class="portrait-photo" src="" alt="个人照片" hidden>
+                            <div class="portrait-placeholder" id="portraitPlaceholder">
+                                <span class="portrait-symbol">青</span>
+                            </div>
+                            <div class="portrait-actions edit-only">
+                                <label class="portrait-upload" for="portraitInput">上传照片</label>
+                                <button type="button" class="portrait-adjust" onclick="openPortraitEditor()">调整构图</button>
+                            </div>
+                            <input type="file" id="portraitInput" accept="image/*" style="display:none;" onchange="handlePortraitUpload(event)">
+                        </div>
+                        <p class="portrait-caption site-editable" data-edit-key="portraitCaption">一介凡人，以术问道</p>
+                    </div>
+                    <div class="about-text">
+                        <p class="about-intro site-editable" data-edit-key="aboutIntro">
+                            袁广，2027届汽车服务工程专业本科毕业生，现居四川成都。具备扎实的机械结构与有限元分析基础，熟练掌握CATIA三维建模、ANSYS Workbench静力学仿真及MATLAB/Python数据处理，致力于在汽车CAE仿真与结构设计领域深耕发展。
+                        </p>
+                        <div class="about-details">
+                            <div class="detail-item">
+                                <span class="detail-label site-editable" data-edit-key="detailFocusLabel">研究方向：</span>
+                                <span class="detail-value site-editable" data-edit-key="detailFocus">CAE仿真 · 汽车测试 · 机械结构设计</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label site-editable" data-edit-key="detailEducationLabel">最高学历：</span>
+                                <span class="detail-value site-editable" data-edit-key="detailEducation">本科 · 成都锦城学院（2025-2027）</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label site-editable" data-edit-key="detailPastLabel">前期修为：</span>
+                                <span class="detail-value site-editable" data-edit-key="detailPast">专科 · 成都农业科技职业学院（2022-2025）</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label site-editable" data-edit-key="detailLocationLabel">所在地：</span>
+                                <span class="detail-value site-editable" data-edit-key="detailLocation">四川成都</span>
+                            </div>
+                        </div>
+                        <p class="about-motto site-editable" data-edit-key="aboutMotto">
+                            “修行一途，无涯也。以勤为径，以恒为舟。”
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-icon">功</span>
+                    <span class="section-title-main site-editable" data-edit-key="projectsTitle">项目实战</span>
+                    <span class="title-icon">法</span>
+                </h2>
+                <p class="section-subtitle site-editable" data-edit-key="projectsSubtitle">实战经验积累，逐步提升自身技术实力</p>
+
+                <div class="projects-grid" id="projects-grid">
+                    <!-- 项目 1：车门把手CAE分析 -->
+                    <article class="project-card editable-wrapper" data-id="proj-1">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openEditProject('proj-1')">编辑</button>
+                            <button type="button" class="delete-btn" onclick="deleteItem('proj-1')">删除</button>
+                        </div>
+                        <div class="card-accent green"></div>
+                        <div class="card-header">
+                            <span class="card-category">CAE仿真 · 结构设计</span>
+                            <h3 class="card-title">车门把手结构静力学分析与轻量化评估</h3>
+                        </div>
+                        <p class="card-description">
+                            使用ANSYS Workbench建立门把手三维实体有限元模型，设置螺栓孔固定约束及50N法向载荷，完成静强度与刚度评估。
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">ANSYS Workbench</span>
+                            <span class="tag">有限元分析</span>
+                            <span class="tag">网格无关性验证</span>
+                        </div>
+                        <div class="card-details">
+                            <p class="card-metric">最大位移 0.063mm · 等效应力 4.33MPa · 安全系数 7.0</p>
+                            <p class="card-metric">8万与12万单元网格应力变化 &lt;3%</p>
+                            <p class="card-metric">线弹性理论交叉验证误差 4.4%</p>
+                        </div>
+                        <div class="card-actions">
+                            <span class="card-link">截面减薄方案 →</span>
+                            <span class="card-link">圆角优化 →</span>
+                        </div>
+                    </article>
+
+                    <!-- 项目 2：OBD-II路试数据分析 -->
+                    <article class="project-card editable-wrapper" data-id="proj-2">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openEditProject('proj-2')">编辑</button>
+                            <button type="button" class="delete-btn" onclick="deleteItem('proj-2')">删除</button>
+                        </div>
+                        <div class="card-accent purple"></div>
+                        <div class="card-header">
+                            <span class="card-category">汽车测试 · 数据分析</span>
+                            <h3 class="card-title">基于OBD-II路试数据的信号处理与异常工况识别</h3>
+                        </div>
+                        <p class="card-description">
+                            基于KIT公开的西雅特实车路试数据，使用MATLAB搭建数据清洗与异常工况筛查流程，处理5.7万条OBD-II记录。
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">MATLAB</span>
+                            <span class="tag">OBD-II</span>
+                            <span class="tag">信号处理</span>
+                        </div>
+                        <div class="card-details">
+                            <p class="card-metric">覆盖82分钟实车驾驶数据</p>
+                            <p class="card-metric">中值滤波 + 移动平均降噪，保留瞬态特征</p>
+                            <p class="card-metric">超速/可疑怠速规则判定，Excel结构化报表输出</p>
+                        </div>
+                        <div class="card-actions">
+                            <span class="card-link">时序对比图 →</span>
+                            <span class="card-link">结构化报表 →</span>
+                        </div>
+                    </article>
+                </div>
+                <div class="section-add-action edit-only">
+                    <button class="add-btn" onclick="openAddProject()">＋ 添加新项目</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-icon">专</span>
+                    <span class="section-title-main site-editable" data-edit-key="skillsTitle">专业技能</span>
+                    <span class="title-icon">业</span>
+                </h2>
+                <p class="section-subtitle site-editable" data-edit-key="skillsSubtitle">多年学习与实践积累的技术功底</p>
+
+                <div class="skills-grid" id="skills-grid">
+                    <!-- 工程软件 -->
+                    <div class="skill-group editable-wrapper" data-group="software">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openAddSkillItem('software')">添加技能</button>
+                        </div>
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon" aria-hidden="true">器</span>
+                            <span class="site-editable" data-edit-key="softwareGroupTitle">工程软件</span>
+                        </h3>
+                        <div class="skill-bars" id="skill-software">
+                            <div class="skill-bar skill-item" data-id="sw-1">
+                                <div class="skill-info">
+                                    <span class="skill-name">CATIA</span>
+                                    <span class="skill-level">熟练 · 三维建模</span>
+                                </div>
+                                <div class="skill-track">
+                                    <div class="skill-fill high" style="width:90%"></div>
+                                </div>
+                                <button type="button" class="delete-btn edit-only" onclick="deleteSkillItem('sw-1')">删除</button>
+                            </div>
+                            <div class="skill-bar skill-item" data-id="sw-2">
+                                <div class="skill-info">
+                                    <span class="skill-name">AutoCAD</span>
+                                    <span class="skill-level">熟练 · 二维制图</span>
+                                </div>
+                                <div class="skill-track">
+                                    <div class="skill-fill high" style="width:85%"></div>
+                                </div>
+                                <button type="button" class="delete-btn edit-only" onclick="deleteSkillItem('sw-2')">删除</button>
+                            </div>
+                            <div class="skill-bar skill-item" data-id="sw-3">
+                                <div class="skill-info">
+                                    <span class="skill-name">ANSYS Workbench</span>
+                                    <span class="skill-level">掌握 · 静力学分析 / 网格无关性验证</span>
+                                </div>
+                                <div class="skill-track">
+                                    <div class="skill-fill high" style="width:80%"></div>
+                                </div>
+                                <button type="button" class="delete-btn edit-only" onclick="deleteSkillItem('sw-3')">删除</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 数据分析 -->
+                    <div class="skill-group editable-wrapper" data-group="data">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openAddSkillItem('data')">添加技能</button>
+                        </div>
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon" aria-hidden="true">算</span>
+                            <span class="site-editable" data-edit-key="dataGroupTitle">数据分析</span>
+                        </h3>
+                        <div class="skill-bars" id="skill-data">
+                            <div class="skill-bar skill-item" data-id="dt-1">
+                                <div class="skill-info">
+                                    <span class="skill-name">MATLAB</span>
+                                    <span class="skill-level">掌握 · 数据清洗 / 滤波 / 可视化</span>
+                                </div>
+                                <div class="skill-track">
+                                    <div class="skill-fill high" style="width:85%"></div>
+                                </div>
+                                <button type="button" class="delete-btn edit-only" onclick="deleteSkillItem('dt-1')">删除</button>
+                            </div>
+                            <div class="skill-bar skill-item" data-id="dt-2">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-level">掌握 · 数据处理</span>
+                                </div>
+                                <div class="skill-track">
+                                    <div class="skill-fill medium" style="width:65%"></div>
+                                </div>
+                                <button type="button" class="delete-btn edit-only" onclick="deleteSkillItem('dt-2')">删除</button>
+                            </div>
+                            <div class="skill-bar skill-item" data-id="dt-3">
+                                <div class="skill-info">
+                                    <span class="skill-name">Excel</span>
+                                    <span class="skill-level">熟练 · 结构化报表</span>
+                                </div>
+                                <div class="skill-track">
+                                    <div class="skill-fill high" style="width:85%"></div>
+                                </div>
+                                <button type="button" class="delete-btn edit-only" onclick="deleteSkillItem('dt-3')">删除</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 专业证书 -->
+                    <div class="skill-group editable-wrapper" data-group="certs">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openAddSkillItem('certs')">添加证书</button>
+                        </div>
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon" aria-hidden="true">证</span>
+                            <span class="site-editable" data-edit-key="certGroupTitle">证书荣誉</span>
+                        </h3>
+                        <div class="skill-cards" id="skill-certs">
+                            <div class="cert-badge badge-item" data-id="cert-1">
+                                <span class="cert-name">汽车维修工（高级工）</span>
+                                <span class="badge-remove" onclick="deleteSkillItem('cert-1')">✕</span>
+                            </div>
+                            <div class="cert-badge badge-item" data-id="cert-2">
+                                <span class="cert-name">C1 机动车驾驶证</span>
+                                <span class="badge-remove" onclick="deleteSkillItem('cert-2')">✕</span>
+                            </div>
+                            <div class="cert-badge badge-item" data-id="cert-3">
+                                <span class="cert-name">3次校级奖学金</span>
+                                <span class="badge-remove" onclick="deleteSkillItem('cert-3')">✕</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 主修课程 -->
+                    <div class="skill-group editable-wrapper" data-group="courses">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openAddSkillItem('courses')">添加课程</button>
+                        </div>
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon" aria-hidden="true">课</span>
+                            <span class="site-editable" data-edit-key="courseGroupTitle">主修课程</span>
+                        </h3>
+                        <div class="course-tags" id="skill-courses">
+                            <span class="course-tag badge-item" data-id="course-1">
+                                机械结构有限元及工程应用
+                                <span class="badge-remove" onclick="deleteSkillItem('course-1')">✕</span>
+                            </span>
+                            <span class="course-tag badge-item" data-id="course-2">
+                                CATIA汽车结构设计
+                                <span class="badge-remove" onclick="deleteSkillItem('course-2')">✕</span>
+                            </span>
+                            <span class="course-tag badge-item" data-id="course-3">
+                                汽车制造工艺
+                                <span class="badge-remove" onclick="deleteSkillItem('course-3')">✕</span>
+                            </span>
+                            <span class="course-tag badge-item" data-id="course-4">
+                                新能源汽车技术
+                                <span class="badge-remove" onclick="deleteSkillItem('course-4')">✕</span>
+                            </span>
+                            <span class="course-tag badge-item" data-id="course-5">
+                                汽车测试技术与传感器
+                                <span class="badge-remove" onclick="deleteSkillItem('course-5')">✕</span>
+                            </span>
+                            <span class="course-tag badge-item" data-id="course-6">
+                                自动驾驶技术
+                                <span class="badge-remove" onclick="deleteSkillItem('course-6')">✕</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <p class="edit-hint edit-only">
+                    编辑模式下可添加、修改或删除技能、证书与课程
+                </p>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section id="journey" class="journey-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-icon">修</span>
+                    <span class="section-title-main site-editable" data-edit-key="journeyTitle">修行履历</span>
+                    <span class="title-icon">途</span>
+                </h2>
+                <p class="section-subtitle site-editable" data-edit-key="journeySubtitle">每一次学习、项目与收获，都是境界向前的一步</p>
+                <div class="journey-timeline" id="journey-list">
+                    <article class="journey-item editable-wrapper" data-id="journey-1">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openEditJourney('journey-1')">编辑</button>
+                            <button type="button" class="delete-btn" onclick="deleteJourney('journey-1')">删除</button>
+                        </div>
+                        <div class="journey-marker">炼</div>
+                        <div class="journey-content">
+                            <time class="journey-time">2022—2025</time>
+                            <h3 class="journey-title">炼体 · 打牢汽车技术基础</h3>
+                            <p class="journey-description">完成汽车检测、维修与制造工艺的系统学习，建立机械结构与车辆工程基础。</p>
+                        </div>
+                    </article>
+                    <article class="journey-item editable-wrapper" data-id="journey-2">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openEditJourney('journey-2')">编辑</button>
+                            <button type="button" class="delete-btn" onclick="deleteJourney('journey-2')">删除</button>
+                        </div>
+                        <div class="journey-marker">筑</div>
+                        <div class="journey-content">
+                            <time class="journey-time">2025—2027</time>
+                            <h3 class="journey-title">筑基 · 深入CAE仿真与结构设计</h3>
+                            <p class="journey-description">专升本进入成都锦城学院，持续积累有限元分析、三维建模与汽车测试项目。</p>
+                        </div>
+                    </article>
+                    <article class="journey-item editable-wrapper" data-id="journey-3">
+                        <div class="edit-toolbar edit-only">
+                            <button type="button" class="edit-btn" onclick="openEditJourney('journey-3')">编辑</button>
+                            <button type="button" class="delete-btn" onclick="deleteJourney('journey-3')">删除</button>
+                        </div>
+                        <div class="journey-marker">行</div>
+                        <div class="journey-content">
+                            <time class="journey-time">下一境</time>
+                            <h3 class="journey-title">历练 · 成为汽车CAE工程师</h3>
+                            <p class="journey-description">把仿真、测试与数据分析能力用于真实产品开发，持续记录新的项目与成果。</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="section-add-action edit-only">
+                    <button type="button" class="add-btn" onclick="openAddJourney()">＋ 记录新收获</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-icon">传</span>
+                    <span class="section-title-main site-editable" data-edit-key="contactTitle">传音留言</span>
+                    <span class="title-icon">音</span>
+                </h2>
+                <p class="section-subtitle site-editable" data-edit-key="contactSubtitle">若有交流，欢迎传音</p>
+
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <p class="contact-text site-editable" data-edit-key="contactIntro" data-edit-format="html">
+                            修行之路虽孤单，但也渴望与同道中人交流心得。<br>
+                            无论是技术探讨、合作邀约，还是单纯打个招呼，<br>
+                            都欢迎通过以下方式联系我。
+                        </p>
+                        <div class="contact-methods">
+                            <a href="tel:13258105878" class="contact-method" data-contact-type="phone">
+                                <span class="method-icon" aria-hidden="true">讯</span>
+                                <span class="method-label site-editable" data-edit-key="phoneLabel">电话</span>
+                                <span class="method-value site-editable" data-edit-key="phoneValue">13258105878</span>
+                            </a>
+                            <a href="mailto:2647577006@qq.com" class="contact-method" data-contact-type="email">
+                                <span class="method-icon" aria-hidden="true">函</span>
+                                <span class="method-label site-editable" data-edit-key="emailLabel">邮箱</span>
+                                <span class="method-value site-editable" data-edit-key="emailValue">2647577006@qq.com</span>
+                            </a>
+                            <div class="contact-method">
+                                <span class="method-icon" aria-hidden="true">域</span>
+                                <span class="method-label site-editable" data-edit-key="locationLabel">位置</span>
+                                <span class="method-value site-editable" data-edit-key="locationValue">四川成都</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">称呼</label>
+                            <input type="text" id="name" name="name" required placeholder="你的称呼">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">留言内容</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="写下你想说的话..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">用邮箱发送传音</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-decoration">
+                <div class="footer-bamboo"></div>
+            </div>
+            <p class="footer-text">
+                <span class="footer-symbol">☯</span>
+                <span class="site-editable" data-edit-key="footerIdentity">袁广 · CAE仿真 · 汽车测试 · 机械设计</span>
+                <span class="footer-symbol">竹</span>
+            </p>
+            <p class="footer-subtext site-editable" data-edit-key="footerMotto">
+                “修行一途，无涯也。以勤为径，以恒为舟。”
+            </p>
+            <p class="footer-copy site-editable" data-edit-key="footerCopyright">&copy; 2027 青竹小轩. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <!-- 长期维护工具：默认只显示一个低干扰入口 -->
+    <aside class="editor-dock" id="editorDock" aria-label="网站编辑工具">
+        <button type="button" class="editor-toggle" id="editModeToggle" onclick="toggleEditMode()">
+            <span class="editor-seal" aria-hidden="true">简</span>
+            <span id="editModeLabel">玉简编辑</span>
+        </button>
+        <div class="editor-panel" id="editorPanel" hidden>
+            <p class="editor-panel-title">身份玉简管理</p>
+            <p class="editor-panel-help">点击带虚线的文字即可修改；项目、技能与履历使用各板块按钮管理。</p>
+            <div class="editor-panel-actions">
+                <button type="button" onclick="saveAllSiteData()">保存全部</button>
+                <button type="button" onclick="exportSiteData()">导出备份</button>
+                <label class="editor-import" for="siteDataImport">导入备份</label>
+                <input type="file" id="siteDataImport" accept="application/json" hidden onchange="importSiteData(event)">
+                <button type="button" onclick="toggleTheme()">切换明暗</button>
+                <button type="button" class="editor-danger" onclick="resetSiteData()">恢复默认</button>
+                <button type="button" class="editor-done" onclick="toggleEditMode(false)">完成编辑</button>
+            </div>
+            <p class="editor-save-status" id="editorSaveStatus" aria-live="polite">所有修改仅保存在当前浏览器，请定期导出备份。</p>
+        </div>
+    </aside>
+
+    <div class="site-toast" id="siteToast" role="status" aria-live="polite"></div>
+
+    <!-- 项目编辑弹窗 -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal">
+            <div class="modal-title">
+                <span id="project-modal-title">添加新项目</span>
+                <button class="modal-close" onclick="closeModal('project-modal')">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="saveProject(event)">
+                <input type="hidden" id="proj-edit-id" value="">
+                <div class="modal-form">
+                    <label>
+                        项目名称
+                        <input type="text" id="proj-title" required placeholder="项目/功法名称">
+                    </label>
+                    <label>
+                        分类标签
+                        <input type="text" id="proj-category" placeholder="如：CAE仿真 · 结构设计">
+                    </label>
+                    <label>
+                        项目描述
+                        <textarea id="proj-desc" required placeholder="项目简介..."></textarea>
+                    </label>
+                    <label>
+                        技术标签（逗号分隔）
+                        <input type="text" id="proj-tags" placeholder="如：ANSYS, MATLAB, Python">
+                    </label>
+                    <label>
+                        关键数据/成果
+                        <textarea id="proj-metrics" placeholder="每行一条关键数据或成果..."></textarea>
+                    </label>
+                    <label>
+                        顶部装饰色
+                        <select id="proj-color">
+                            <option value="green">青竹绿（默认）</option>
+                            <option value="purple">紫灵紫</option>
+                            <option value="silver">银月白</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('project-modal')">取消</button>
+                    <button type="submit" class="modal-btn primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 技能项编辑弹窗 -->
+    <div class="modal-overlay" id="skill-modal">
+        <div class="modal">
+            <div class="modal-title">
+                <span id="skill-modal-title">添加技能项</span>
+                <button class="modal-close" onclick="closeModal('skill-modal')">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="saveSkillItem(event)">
+                <input type="hidden" id="skill-group-type" value="">
+                <input type="hidden" id="skill-edit-id" value="">
+                <div class="modal-form">
+                    <div id="skill-inputs">
+                        <!-- 动态生成输入框 -->
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('skill-modal')">取消</button>
+                    <button type="submit" class="modal-btn primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 修行履历编辑弹窗 -->
+    <div class="modal-overlay" id="journey-modal">
+        <div class="modal">
+            <div class="modal-title">
+                <span id="journey-modal-title">记录新收获</span>
+                <button class="modal-close" onclick="closeModal('journey-modal')" aria-label="关闭">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="saveJourney(event)">
+                <input type="hidden" id="journey-edit-id" value="">
+                <label>时间或阶段<input type="text" id="journey-time" required placeholder="如：2026.07 / 下一境"></label>
+                <label>境界与标题<input type="text" id="journey-title" required placeholder="如：筑基 · 完成首个CAE项目"></label>
+                <label>收获说明<textarea id="journey-description" required placeholder="记录学习、项目、证书或阶段成果"></textarea></label>
+                <label>境界印记<input type="text" id="journey-marker" maxlength="1" value="行" placeholder="行"></label>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('journey-modal')">取消</button>
+                    <button type="submit" class="modal-btn primary">保存记录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 照片裁切与构图弹窗 -->
+    <div class="modal-overlay" id="portrait-modal">
+        <div class="modal portrait-editor-modal">
+            <div class="modal-title">
+                <span>调整个人照片</span>
+                <button class="modal-close" onclick="closeModal('portrait-modal')" aria-label="关闭">✕</button>
+            </div>
+            <p class="portrait-editor-help">拖动照片调整位置，使用缩放与旋转让人物适合玉简相框。</p>
+            <div class="portrait-crop-stage">
+                <canvas id="portraitCropCanvas" width="720" height="900" aria-label="照片裁切预览"></canvas>
+                <div class="crop-corner top-left"></div>
+                <div class="crop-corner top-right"></div>
+                <div class="crop-corner bottom-left"></div>
+                <div class="crop-corner bottom-right"></div>
+            </div>
+            <div class="portrait-editor-controls">
+                <label>缩放<input type="range" id="portraitZoom" min="1" max="3" step="0.01" value="1"></label>
+                <div class="portrait-rotate-actions">
+                    <button type="button" onclick="rotatePortrait(-90)">左旋 90°</button>
+                    <button type="button" onclick="rotatePortrait(90)">右旋 90°</button>
+                    <button type="button" onclick="resetPortraitCrop()">重置</button>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn secondary" onclick="closeModal('portrait-modal')">取消</button>
+                <button type="button" class="modal-btn primary" onclick="savePortraitCrop()">保存构图</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
